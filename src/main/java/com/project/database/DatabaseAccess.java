@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.project.model.Party;
+import com.project.model.Post;
 
 public class DatabaseAccess {
 	private Connection currentCon = null;
@@ -97,6 +97,30 @@ public class DatabaseAccess {
 			e.printStackTrace();
 		}
 		return maxId;
+	}
+
+
+	public int loadAllPosts(ArrayList<Post> posts) {
+		
+		int count = 0;
+		try {
+			currentCon = new ClientSpecificDataConnectionManager().getConnection();
+			String query = "Insert into post values (?,?,?,?)";
+			PreparedStatement pst = currentCon.prepareStatement(query);
+			for(Post p : posts) {
+				pst.setLong(1,p.getId());
+				pst.setLong(2, p.getUserId());
+				pst.setString(3, p.getTitle());
+				pst.setString(4, p.getBody());
+				
+				count += pst.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }
