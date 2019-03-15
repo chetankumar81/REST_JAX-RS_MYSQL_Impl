@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,8 +19,8 @@ public class PartyResource {
 	PartyService partyService = new PartyServiceImpl();
 	
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getParties() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Party> getParties() {
 		return partyService.getAllParties();
 	}
 	

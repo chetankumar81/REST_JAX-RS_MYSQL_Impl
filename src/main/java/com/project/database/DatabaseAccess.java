@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.project.model.Party;
 
@@ -33,6 +34,25 @@ public class DatabaseAccess {
 		return party;
 	}
 
+
+	public ArrayList<Party> getAllParties() {
+		ArrayList<Party> parties = new ArrayList<>();
+		try {
+			currentCon = new ClientSpecificDataConnectionManager().getConnection();
+			String query = "select * from party";
+			PreparedStatement pst = currentCon.prepareStatement(query);
+			
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				Party party = getPartyById(rs.getInt(1));
+				parties.add(party);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return parties;
+	}
 	
 	public Party createParty(Party party) {
 		int maxId = getMaxId(party);
@@ -78,4 +98,5 @@ public class DatabaseAccess {
 		}
 		return maxId;
 	}
+
 }

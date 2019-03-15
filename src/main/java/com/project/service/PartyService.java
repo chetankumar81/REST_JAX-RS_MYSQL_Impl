@@ -1,9 +1,11 @@
 package com.project.service;
 
+import java.util.ArrayList;
+
 import com.project.model.Party;
 
 public interface PartyService {
-	public String getAllParties();
+	public ArrayList<Party> getAllParties();
 	
 	public Party getPartyById(int id);
 

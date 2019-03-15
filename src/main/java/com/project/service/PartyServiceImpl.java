@@ -1,5 +1,7 @@
 package com.project.service;
 
+import java.util.ArrayList;
+
 import com.project.dao.PartyDao;
 import com.project.dao.PartyDaoImpl;
 import com.project.model.Party;
@@ -9,9 +11,9 @@ public class PartyServiceImpl implements PartyService {
 	PartyDao partyDao = new PartyDaoImpl();
 	
 	@Override
-	public String getAllParties() {
+	public ArrayList<Party> getAllParties() {
 		// TODO Auto-generated method stub
-		return "Hello";
+		return partyDao.getAllParties();
 	}
 	
 	public Party getPartyById(int id) {

@@ -1,5 +1,7 @@
 package com.project.dao;
 
+import java.util.ArrayList;
+
 import com.project.database.DatabaseAccess;
 import com.project.model.Party;
 
@@ -18,6 +20,12 @@ public class PartyDaoImpl implements PartyDao {
 	public Party createParty(Party party) {
 		party = new DatabaseAccess().createParty(party);
 		return party;
+	}
+
+	@Override
+	public ArrayList<Party> getAllParties() {
+		ArrayList<Party> parties = new DatabaseAccess().getAllParties();
+		return parties;
 	}
 
 }
